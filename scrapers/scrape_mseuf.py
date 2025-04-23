@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import time
 import random
+import re
 
 def main():
     # Data storage
@@ -22,11 +23,22 @@ def main():
         major = card.find('p', class_='majors')
         campus = card.find('p', class_='campus')
 
-        # Text extraction (error handled)
+        # --------- Text extraction (error handled) ---------
+        # Program Name
         program_name_txt = program_name.get_text(strip=True) if program_name else 'N/A'
+
+        # Degree Type
         degree_type_txt = degree_type.get_text(strip=True) if degree_type else 'N/A'
+        degree_type_txt = degree_type_txt.removesuffix(' in').removesuffix(' of') # Remove unnecessary suffixes
+        degree_type_txt = degree_type_txt.replace('(', '').replace(')', '') # Remove unnecessary parentheses
+
+        # Major
         major_txt = major.get_text(strip=True) if major else 'N/A'
+        major_txt = major_txt.replace('major in', '').strip()
+
+        # Campus Location
         campus_txt = campus.get_text(strip=True) if campus else 'N/A'
+        campus_txt = campus_txt.replace('Offered in', '').strip()
 
         print(f'Program Name: {program_name_txt}')
         print(f'Degree Type: {degree_type_txt}')
