@@ -46,7 +46,34 @@ def main():
         print(f'Campus: {campus_txt}')
         print()
 
+        # Mid item delay
         time.sleep(random.uniform(1, 3))
+
+        prog_details_url = card.find('a', attrs={'class': 'action', 'title': 'View Program'})['href']
+        prog_details_response = requests.get(f'https://mseuf.edu.ph{prog_details_url}')
+        prog_details_soup = BeautifulSoup(prog_details_response.text, 'lxml')
+
+        # --------- PROGRAM DETAILS: text extraction (error handled) ---------
+
+        # Program Educational Objectives (PEO)
+        obj_div = prog_details_soup.find('div', class_='objectives')
+        obj_tbody = obj_div.find('tbody')
+        if obj_tbody:
+            obj_tr_list = obj_tbody.find_all('tr')
+            cnt = 1
+            for tr in obj_tr_list:
+                obj_objective = tr.find('td') # Get first 'td' instance for objectives
+                obj_objective_txt = obj_objective.get_text(strip=True)
+                obj_objective_txt = re.sub(r'^\d', '', obj_objective_txt) # Remove annoying objective count prefix
+                print(f'Objective #{cnt}: {obj_objective_txt}')
+                print()
+
+                cnt += 1
+        
+        # Delay
+        time.sleep(random.uniform(1, 3))
+
+
 
 if __name__ == '__main__':
     main()
