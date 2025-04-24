@@ -24,11 +24,24 @@ def main():
         header_next = header.find_next_sibling()
         if header_next:
             if header_next.name == 'ol':
-                program_listing = header_next.find_all('li')
+                program_listing = header_next.find_all('li', recursive=False) # Get only direct children
                 for program in program_listing:
-                    program_name = program.get_text(strip=True)
-                    print(f'{program_name}')
-                    print()
+                    # Standard course/strand program
+                    if program.find('ul') is None:
+                        program_name = program.get_text(strip=True)
+                        print(f'{program_name}')
+                        print()
+
+                    # Course w/ major listing
+                    else:
+                        program_name = program.find('a').get_text(strip=True)
+                        program_name = re.search(r'^(.+) majors? in', program_name, re.IGNORECASE).group(1)
+                        print(f'{program_name}')
+                        major_listing = program.find('ul').find_all('li')
+                        for mj in major_listing:
+                            major = mj.get_text(strip=True)
+                            print(f'Major: {major}')
+                        print()
 
             elif header_next.name == 'ul':
                 inner_ol = header_next.find('ol')
