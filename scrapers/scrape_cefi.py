@@ -6,16 +6,25 @@ import random
 import re
 
 def extract_program_details(program_details_url, headers):
+
+    # Local method to find deepest tag nesting of <ol> and <ul> (Because of the fragmented/confusing HTML layouting)
+    def find_deepest_list_tag(element):
+        current = element.find(['ol', 'ul'])
+        while current:
+            next_level = current.find(['ol', 'ul'])
+            if not next_level:
+                break
+            current = next_level
+        return current
+
     prog_details_response = requests.get(program_details_url, headers=headers)
     prog_details_soup = BeautifulSoup(prog_details_response.text, 'lxml')
     peo_header = prog_details_soup.find('h4', string=re.compile(r'^Program Educational Objectives', re.IGNORECASE))
     if peo_header:
-        peo_listing = peo_header.find_next(['ol', 'ul']).find(['ol', 'ul'])
-        if peo_listing:
-            peo_listing = peo_listing.find_all('li')
-        else:
-            peo_listing = peo_header.find_next(['ol', 'ul']).find_all('li')
-
+        peo_listing_base = peo_header.find_next(['ol', 'ul'])
+        peo_listing = find_deepest_list_tag(peo_listing_base)
+        if not peo_listing:
+            peo_listing = peo_listing_base
         for peo in peo_listing:
             peo_txt = peo.get_text(strip=True)
             print(peo_txt)
