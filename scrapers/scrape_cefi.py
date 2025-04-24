@@ -19,6 +19,17 @@ def extract_program_details(program_details_url, headers):
 
     prog_details_response = requests.get(program_details_url, headers=headers)
     prog_details_soup = BeautifulSoup(prog_details_response.text, 'lxml')
+
+    # Department Name
+    vision_header = prog_details_soup.find('h4', string=re.compile(r'^VISION', re.IGNORECASE))
+    if vision_header:
+        dept_match = re.search(r'The ((?:[A-Z][a-z]+|of|and)(?:\s(?:[A-Z][a-z]+|of|and))*)', vision_header.find_next('p').get_text(strip=True))
+        dept_name = dept_match.group(1) if dept_match else 'N/A'
+        print(f'Department Name: {dept_name}')
+    else:
+        dept_name = 'N/A'
+
+    # Program Educational Objectives (PEO)
     peo_header = prog_details_soup.find('h4', string=re.compile(r'^Program Educational Objectives', re.IGNORECASE))
     if peo_header:
         peo_listing_base = peo_header.find_next(['ol', 'ul'])
