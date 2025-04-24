@@ -19,7 +19,7 @@ def extract_program_details(program_details_url, headers):
         for peo in peo_listing:
             peo_txt = peo.get_text(strip=True)
             print(peo_txt)
-            
+
 def main():
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " \
@@ -46,6 +46,8 @@ def main():
                         program_tag = program.find('a')
                         program_details_url = program_tag['href']
                         program_name = program_tag.get_text(strip=True)
+                        print()
+                        print('----------------')
                         print(f'{program_name}')
                         print()
 
@@ -56,11 +58,13 @@ def main():
                     else:
                         program_name = program.find('a').get_text(strip=True)
                         program_name = re.search(r'^(.+) majors? in', program_name, re.IGNORECASE).group(1)
-                        print(f'{program_name}')
                         major_listing = program.find('ul').find_all('a')
                         for mj in major_listing:
                             major_details_url = mj['href']
                             major = mj.get_text(strip=True)
+                            print()
+                            print('----------------')
+                            print(f'{program_name}')
                             print(f'Major: {major}')
                             print()
 
@@ -76,6 +80,8 @@ def main():
                         program_tag = program.find('a')
                         program_details_url = program_tag['href']
                         program_name = program_tag.get_text(strip=True)
+                        print()
+                        print('----------------')
                         print(f'{program_name}')
                         print()
 
@@ -90,6 +96,8 @@ def main():
                         program_name = strand.get_text(strip=True)
                         program_name = re.match(r'.*(?:\d+\.|\*)(.+)', program_name).group(1).strip() # Extract clean data
                         program_name = program_name.replace('&nbsp;', '') # Remove '&nbsp;' instances
+                        print()
+                        print('----------------')
                         print(f'{program_name}')
                         print()
 
@@ -102,6 +110,8 @@ def main():
                     for strand in ul_listing:
                         program_details_url = strand['href']
                         program_name = strand.get_text()
+                        print()
+                        print('----------------')
                         print(f'{program_name}')
                         print()
 
