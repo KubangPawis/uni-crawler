@@ -28,7 +28,9 @@ def main():
                 for program in program_listing:
                     # Standard course/strand program
                     if program.find('ul') is None:
-                        program_name = program.get_text(strip=True)
+                        program_tag = program.find('a')
+                        program_details_url = program_tag['href']
+                        program_name = program_tag.get_text(strip=True)
                         print(f'{program_name}')
                         print()
 
@@ -37,8 +39,9 @@ def main():
                         program_name = program.find('a').get_text(strip=True)
                         program_name = re.search(r'^(.+) majors? in', program_name, re.IGNORECASE).group(1)
                         print(f'{program_name}')
-                        major_listing = program.find('ul').find_all('li')
+                        major_listing = program.find('ul').find_all('a')
                         for mj in major_listing:
+                            major_details_url = mj['href']
                             major = mj.get_text(strip=True)
                             print(f'Major: {major}')
                         print()
@@ -49,7 +52,9 @@ def main():
                     # Academic Tracks
                     program_listing = inner_ol.find_all('li')
                     for program in program_listing:
-                        program_name = program.get_text(strip=True)
+                        program_tag = program.find('a')
+                        program_details_url = program_tag['href']
+                        program_name = program_tag.get_text(strip=True)
                         print(f'{program_name}')
                         print()
 
@@ -57,6 +62,7 @@ def main():
                     tech_voc_listing = header_next.find_all(recursive=False)[1]
                     tech_voc_track = tech_voc_listing.find_all('a')
                     for strand in tech_voc_track:
+                        program_details_url = strand['href']
                         program_name = strand.get_text(strip=True)
                         program_name = re.match(r'.*(?:\d+\.|\*)(.+)', program_name).group(1).strip() # Extract clean data
                         program_name = program_name.replace('&nbsp;', '') # Remove '&nbsp;' instances
@@ -67,6 +73,7 @@ def main():
                 else:
                     ul_listing = header_next.find_all('a')
                     for strand in ul_listing:
+                        program_details_url = strand['href']
                         program_name = strand.get_text()
                         print(f'{program_name}')
                         print()
