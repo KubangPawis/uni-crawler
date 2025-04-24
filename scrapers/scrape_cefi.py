@@ -29,6 +29,19 @@ def extract_program_details(program_details_url, headers):
             peo_txt = peo.get_text(strip=True).capitalize()
             print(peo_txt)
 
+def extract_degree_type(program_header, program_name):
+    if re.match(r'^TERTIARY PROGRAMS', program_header, re.IGNORECASE):
+        if program_name.upper().startswith('BS'):
+            return 'Bachelor of Science'
+        elif program_name.upper().startswith('AB') or program_name.upper().startswith('BA'):
+            return 'Bachelor of Arts'
+        elif program_name.startswith('Bachelor'):
+            return 'Bachelor'
+        else:
+            return 'Bachelor'
+    else:
+        return 'N/A'
+
 def main():
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " \
@@ -61,6 +74,7 @@ def main():
                         print()
 
                         # PROGRAM DETAILS: data extraction
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         extract_program_details(program_details_url, headers)
 
                     # Course w/ major listing
@@ -78,6 +92,7 @@ def main():
                             print()
 
                             # PROGRAM DETAILS: data extraction
+                            degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                             extract_program_details(major_details_url, headers)
         
             elif header_next.name == 'ul':
@@ -95,6 +110,7 @@ def main():
                         print()
 
                         # PROGRAM DETAILS: data extraction
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         extract_program_details(program_details_url, headers)
 
                     # Technical-Vocational Track
@@ -111,6 +127,7 @@ def main():
                         print()
 
                         # PROGRAM DETAILS: data extraction
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         extract_program_details(program_details_url, headers)
 
                 # Standard one-level unordered listing
@@ -125,6 +142,7 @@ def main():
                         print()
 
                         # PROGRAM DETAILS: data extraction
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         extract_program_details(program_details_url, headers)
                     
         time.sleep(random.uniform(1, 3))
