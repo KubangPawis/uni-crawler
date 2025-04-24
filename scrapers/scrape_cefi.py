@@ -5,6 +5,21 @@ import time
 import random
 import re
 
+def extract_program_details(program_details_url, headers):
+    prog_details_response = requests.get(program_details_url, headers=headers)
+    prog_details_soup = BeautifulSoup(prog_details_response.text, 'lxml')
+    peo_header = prog_details_soup.find('h4', string=re.compile(r'^Program Educational Objectives', re.IGNORECASE))
+    if peo_header:
+        peo_listing = peo_header.find_next(['ol', 'ul']).find(['ol', 'ul'])
+        if peo_listing:
+            peo_listing = peo_listing.find_all('li')
+        else:
+            peo_listing = peo_header.find_next(['ol', 'ul']).find_all('li')
+
+        for peo in peo_listing:
+            peo_txt = peo.get_text(strip=True)
+            print(peo_txt)
+            
 def main():
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " \
@@ -34,6 +49,9 @@ def main():
                         print(f'{program_name}')
                         print()
 
+                        # PROGRAM DETAILS: data extraction
+                        extract_program_details(program_details_url, headers)
+
                     # Course w/ major listing
                     else:
                         program_name = program.find('a').get_text(strip=True)
@@ -44,8 +62,11 @@ def main():
                             major_details_url = mj['href']
                             major = mj.get_text(strip=True)
                             print(f'Major: {major}')
-                        print()
+                            print()
 
+                            # PROGRAM DETAILS: data extraction
+                            extract_program_details(major_details_url, headers)
+        
             elif header_next.name == 'ul':
                 inner_ol = header_next.find('ol')
                 if inner_ol:
@@ -58,6 +79,9 @@ def main():
                         print(f'{program_name}')
                         print()
 
+                        # PROGRAM DETAILS: data extraction
+                        extract_program_details(program_details_url, headers)
+
                     # Technical-Vocational Track
                     tech_voc_listing = header_next.find_all(recursive=False)[1]
                     tech_voc_track = tech_voc_listing.find_all('a')
@@ -69,6 +93,9 @@ def main():
                         print(f'{program_name}')
                         print()
 
+                        # PROGRAM DETAILS: data extraction
+                        extract_program_details(program_details_url, headers)
+
                 # Standard one-level unordered listing
                 else:
                     ul_listing = header_next.find_all('a')
@@ -77,6 +104,9 @@ def main():
                         program_name = strand.get_text()
                         print(f'{program_name}')
                         print()
+
+                        # PROGRAM DETAILS: data extraction
+                        extract_program_details(program_details_url, headers)
                     
         time.sleep(random.uniform(1, 3))
 
