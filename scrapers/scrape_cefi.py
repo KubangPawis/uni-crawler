@@ -26,7 +26,7 @@ def extract_program_details(program_details_url, headers):
         if not peo_listing:
             peo_listing = peo_listing_base
         for peo in peo_listing:
-            peo_txt = peo.get_text(strip=True)
+            peo_txt = peo.get_text(strip=True).capitalize()
             print(peo_txt)
 
 def main():
