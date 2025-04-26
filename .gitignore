@@ -1,1 +1,30 @@
-/venv
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.eggs/
+*.log
+*.sqlite3
+*.db
+*.pkl
+.DS_Store
+
+# Virtual Environments
+venv/
+
+# Dagster Local Files
+dagster.yaml
+dagster.log
+workspace.yaml
+storage/
+
+# VSCode & IDEs
+.vscode/
+.idea/
+
+# Test coverage and cache
+.coverage
+htmlcov/
+.tox/
+.cache/
+pytest_cache/
