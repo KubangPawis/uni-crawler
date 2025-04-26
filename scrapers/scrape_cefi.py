@@ -38,8 +38,9 @@ def extract_program_details(program_details_url, headers):
         if not peo_listing:
             peo_listing = peo_listing_base
         for peo in peo_listing:
-            peo_txt = peo.get_text(strip=True).capitalize()
-            print(peo_txt)
+            if peo_txt := peo.get_text(strip=True):
+                peo_txt = peo_txt.capitalize()
+                print(f' > {peo_txt}')
 
 def extract_degree_type(program_header, program_name):
     if re.match(r'^TERTIARY PROGRAMS', program_header, re.IGNORECASE):
@@ -87,10 +88,10 @@ def main():
                         print(f'{program_name}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
-                        print()
 
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
+                        print(f'Degree Type: {degree_type}')
                         extract_program_details(program_details_url, headers)
 
                     # Course w/ major listing
@@ -107,10 +108,10 @@ def main():
                             print(f'{program_name}')
                             print(f'Major: {major}')
                             print(f'Campus: {campus}')
-                            print()
 
                             # PROGRAM DETAILS: data extraction
                             degree_type = extract_degree_type(header.get_text(strip=True), program_name)
+                            print(f'Degree Type: {degree_type}')
                             extract_program_details(major_details_url, headers)
         
             elif header_next.name == 'ul':
@@ -129,10 +130,10 @@ def main():
                         print(f'{program_name}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
-                        print()
 
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
+                        print(f'Degree Type: {degree_type}')
                         extract_program_details(program_details_url, headers)
 
                     # Technical-Vocational Track
@@ -150,10 +151,10 @@ def main():
                         print(f'{program_name}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
-                        print()
 
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
+                        print(f'Degree Type: {degree_type}')
                         extract_program_details(program_details_url, headers)
 
                 # Standard one-level unordered listing
@@ -168,7 +169,7 @@ def main():
                         print('----------------')
                         print(f'{program_name}')
                         print(f'Major: {major}')
-                        print()
+                        print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
