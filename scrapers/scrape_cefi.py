@@ -89,18 +89,18 @@ def main():
                         program_tag = program.find('a')
                         program_details_url = program_tag['href']
                         program_name = program_tag.get_text(strip=True)
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         program_name = extract_program_name(program_name)
                         major = 'N/A'
                         campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Degree Type: {degree_type}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
-                        print(f'Degree Type: {degree_type}')
                         dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
                         print(f'Department: {dept_name}')
                         for peo in clean_peo_list:
@@ -110,6 +110,7 @@ def main():
                     else:
                         program_name = program.find('a').get_text(strip=True)
                         program_name = re.search(r'^(.+) majors? in', program_name, re.IGNORECASE).group(1)
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         program_name = extract_program_name(program_name)
                         major_listing = program.find('ul').find_all('a')
                         for mj in major_listing:
@@ -119,12 +120,11 @@ def main():
                             print()
                             print('----------------')
                             print(f'{program_name}')
+                            print(f'Degree Type: {degree_type}')
                             print(f'Major: {major}')
                             print(f'Campus: {campus}')
 
                             # PROGRAM DETAILS: data extraction
-                            degree_type = extract_degree_type(header.get_text(strip=True), program_name)
-                            print(f'Degree Type: {degree_type}')
                             dept_name, clean_peo_list = extract_program_details(major_details_url, headers)
                             print(f'Department: {dept_name}')
                             for peo in clean_peo_list:
@@ -139,18 +139,18 @@ def main():
                         program_tag = program.find('a')
                         program_details_url = program_tag['href']
                         program_name = program_tag.get_text(strip=True)
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         program_name = extract_program_name(program_name)
                         major = 'N/A'
                         campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Degree Type: {degree_type}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
-                        print(f'Degree Type: {degree_type}')
                         dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
                         print(f'Department: {dept_name}')
                         for peo in clean_peo_list:
@@ -164,18 +164,18 @@ def main():
                         program_name = strand.get_text(strip=True)
                         program_name = re.match(r'.*(?:\d+\.|\*)(.+)', program_name).group(1).strip() # Extract clean data
                         program_name = program_name.replace('&nbsp;', '') # Remove '&nbsp;' instances
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         program_name = extract_program_name(program_name)
                         major = 'N/A'
                         campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Degree Type: {degree_type}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
-                        print(f'Degree Type: {degree_type}')
                         dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
                         print(f'Department: {dept_name}')
                         for peo in clean_peo_list:
@@ -186,19 +186,19 @@ def main():
                     ul_listing = header_next.find_all('a')
                     for strand in ul_listing:
                         program_details_url = strand['href']
-                        program_name = strand.get_text()
+                        program_name = strand.get_text(strip=True)
+                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         program_name = extract_program_name(program_name)
                         major = 'N/A'
                         campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Degree Type: {degree_type}')
                         print(f'Major: {major}')
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        degree_type = extract_degree_type(header.get_text(strip=True), program_name)
-                        print(f'Degree Type: {degree_type}')
                         dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
                         print(f'Department: {dept_name}')
                         for peo in clean_peo_list:
