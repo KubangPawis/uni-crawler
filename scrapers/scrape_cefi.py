@@ -337,5 +337,3 @@ def scrape_cefi_data():
 
     # RETURN TYPES: DataFrame, DataFrame
     return program_df, program_peo_df
-
-scrape_cefi_data()
