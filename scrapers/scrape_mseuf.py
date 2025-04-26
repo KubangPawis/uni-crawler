@@ -77,6 +77,9 @@ def main():
                 print(program_peo_df)
                 print()
 
+                # DELAY
+                time.sleep(random.uniform(1, 3))
+
         # Store extracted data onto dedicated DataFrames
         current_prog_data = pd.DataFrame({
             'id': [len(program_df) + 1],
