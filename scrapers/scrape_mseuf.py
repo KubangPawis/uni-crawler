@@ -7,10 +7,8 @@ import re
 
 def main():
     # Data storage
-    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'department'])
-    program_campus_df = pd.DataFrame(columns=['id', 'program_id', 'campus'])
+    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus', 'department'])
     program_peo_df = pd.DataFrame(columns=['id', 'program_id', 'peo'])
-    program_outcomes_df = pd.DataFrame(columns=['id', 'program_id', 'outcome'])
 
     url_response = requests.get('https://mseuf.edu.ph/programs')
     soup = BeautifulSoup(url_response.text, 'lxml')
@@ -65,15 +63,35 @@ def main():
                 obj_objective = tr.find('td') # Get first 'td' instance for objectives
                 obj_objective_txt = obj_objective.get_text(strip=True)
                 obj_objective_txt = re.sub(r'^\d', '', obj_objective_txt) # Remove annoying objective count prefix
+                cnt += 1
                 print(f'Objective #{cnt}: {obj_objective_txt}')
                 print()
 
-                cnt += 1
+                # Store extracted PEO data onto dedicated DataFrames
+                current_prog_peo_data = pd.DataFrame({
+                    'id': [len(program_peo_df) + 1],
+                    'program_id': [len(program_df) + 1],
+                    'peo': [obj_objective_txt]
+                })
+                program_peo_df = pd.concat([program_peo_df, current_prog_peo_data], ignore_index=True)
+                print(program_peo_df)
+                print()
+
+        # Store extracted data onto dedicated DataFrames
+        current_prog_data = pd.DataFrame({
+            'id': [len(program_df) + 1],
+            'program_name': [program_name_txt],
+            'major': [major_txt],
+            'degree_type': [degree_type_txt],
+            'campus': [campus_txt],
+            'department': ['DEPARTMENT']
+        })
+        program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
+        print(program_df)
+        print()
         
         # Delay
         time.sleep(random.uniform(1, 3))
-
-
 
 if __name__ == '__main__':
     main()
