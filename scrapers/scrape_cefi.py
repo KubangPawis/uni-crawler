@@ -189,6 +189,9 @@ def main():
                         print(program_peo_df)
                         print()
                         print(program_df)
+
+                # DELAY
+                time.sleep(random.uniform(1, 3))
         
             elif header_next.name == 'ul':
                 inner_ol = header_next.find('ol')
@@ -240,6 +243,9 @@ def main():
                         print()
                         print(program_df)
 
+                    # DELAY
+                    time.sleep(random.uniform(1, 3))
+
                     # Technical-Vocational Track
                     tech_voc_listing = header_next.find_all(recursive=False)[1]
                     tech_voc_track = tech_voc_listing.find_all('a')
@@ -289,6 +295,9 @@ def main():
                         print()
                         print(program_df)
 
+                    # DELAY
+                    time.sleep(random.uniform(1, 3))
+
                 # Standard one-level unordered listing
                 else:
                     ul_listing = header_next.find_all('a')
@@ -335,7 +344,11 @@ def main():
                         print(program_peo_df)
                         print()
                         print(program_df)
+
+                    # DELAY
+                    time.sleep(random.uniform(1, 3))
                     
+        # DELAY
         time.sleep(random.uniform(1, 3))
 
 if __name__ == '__main__':
