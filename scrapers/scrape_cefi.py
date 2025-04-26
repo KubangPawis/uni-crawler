@@ -5,7 +5,7 @@ import time
 import random
 import re
 
-# RETURN VALUES: dept_name(str), clean_peo_list(list)
+# RETURN VALUE: clean_peo_list(list)
 def extract_program_details(program_details_url, headers):
 
     # Local method to find deepest tag nesting of <ol> and <ul> (Because of the fragmented/confusing HTML layouting)
@@ -20,14 +20,6 @@ def extract_program_details(program_details_url, headers):
 
     prog_details_response = requests.get(program_details_url, headers=headers)
     prog_details_soup = BeautifulSoup(prog_details_response.text, 'lxml')
-
-    # Department Name
-    vision_header = prog_details_soup.find('h4', string=re.compile(r'^VISION', re.IGNORECASE))
-    if vision_header:
-        dept_match = re.search(r'The ((?:[A-Z][a-z]+|of|and)(?:\s(?:[A-Z][a-z]+|of|and))*)', vision_header.find_next('p').get_text(strip=True))
-        dept_name = dept_match.group(1) if dept_match else 'N/A'
-    else:
-        dept_name = 'N/A'
 
     # Program Educational Objectives (PEO)
     peo_header = prog_details_soup.find('h4', string=re.compile(r'^Program Educational Objectives', re.IGNORECASE))
@@ -44,8 +36,8 @@ def extract_program_details(program_details_url, headers):
                 peo_txt = peo_txt.capitalize()
                 clean_peo_list.append(peo_txt)
 
-    # RETURN DTYPES: str, list
-    return dept_name, clean_peo_list
+    # RETURN DTYPE: list
+    return clean_peo_list
 
 def extract_degree_type(program_header, program_name):
     if re.match(r'^TERTIARY PROGRAMS', program_header, re.IGNORECASE):
@@ -72,7 +64,7 @@ def extract_program_name(raw_program_name):
 
 def scrape_cefi_data():
     # Data storage
-    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus', 'department'])
+    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus'])
     program_peo_df = pd.DataFrame(columns=['id', 'program_id', 'peo'])
 
     # Header initialization (for http requests)
@@ -113,8 +105,7 @@ def scrape_cefi_data():
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
-                        print(f'Department: {dept_name}')
+                        clean_peo_list = extract_program_details(program_details_url, headers)
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
@@ -133,7 +124,6 @@ def scrape_cefi_data():
                             'major': [major],
                             'degree_type': [degree_type],
                             'campus': [campus],
-                            'department': [dept_name]
                         })
 
                         program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
@@ -161,8 +151,7 @@ def scrape_cefi_data():
                             print(f'Campus: {campus}')
 
                             # PROGRAM DETAILS: data extraction
-                            dept_name, clean_peo_list = extract_program_details(major_details_url, headers)
-                            print(f'Department: {dept_name}')
+                            clean_peo_list = extract_program_details(major_details_url, headers)
                             for peo in clean_peo_list:
                                 print(f' > {peo}')
 
@@ -181,7 +170,6 @@ def scrape_cefi_data():
                             'major': [major],
                             'degree_type': [degree_type],
                             'campus': [campus],
-                            'department': [dept_name]
                         })
 
                         program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
@@ -214,8 +202,7 @@ def scrape_cefi_data():
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
-                        print(f'Department: {dept_name}')
+                        clean_peo_list = extract_program_details(program_details_url, headers)
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
@@ -234,7 +221,6 @@ def scrape_cefi_data():
                             'major': [major],
                             'degree_type': [degree_type],
                             'campus': [campus],
-                            'department': [dept_name]
                         })
 
                         program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
@@ -266,8 +252,7 @@ def scrape_cefi_data():
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
-                        print(f'Department: {dept_name}')
+                        clean_peo_list = extract_program_details(program_details_url, headers)
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
@@ -286,7 +271,6 @@ def scrape_cefi_data():
                             'major': [major],
                             'degree_type': [degree_type],
                             'campus': [campus],
-                            'department': [dept_name]
                         })
 
                         program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
@@ -316,8 +300,7 @@ def scrape_cefi_data():
                         print(f'Campus: {campus}')
 
                         # PROGRAM DETAILS: data extraction
-                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
-                        print(f'Department: {dept_name}')
+                        clean_peo_list = extract_program_details(program_details_url, headers)
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
@@ -336,7 +319,6 @@ def scrape_cefi_data():
                             'major': [major],
                             'degree_type': [degree_type],
                             'campus': [campus],
-                            'department': [dept_name]
                         })
 
                         program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
@@ -355,3 +337,5 @@ def scrape_cefi_data():
 
     # RETURN TYPES: DataFrame, DataFrame
     return program_df, program_peo_df
+
+scrape_cefi_data()

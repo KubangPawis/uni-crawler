@@ -7,7 +7,7 @@ import re
 
 def scrape_mseuf_data():
     # Data storage
-    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus', 'department'])
+    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus'])
     program_peo_df = pd.DataFrame(columns=['id', 'program_id', 'peo'])
 
     url_response = requests.get('https://mseuf.edu.ph/programs')
@@ -87,7 +87,6 @@ def scrape_mseuf_data():
             'major': [major_txt],
             'degree_type': [degree_type_txt],
             'campus': [campus_txt],
-            'department': ['DEPARTMENT']
         })
         program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
         print(program_df)
