@@ -17,6 +17,7 @@ dagster.yaml
 dagster.log
 workspace.yaml
 storage/
+.tmp_dagster_home_*
 
 # VSCode & IDEs
 .vscode/
