@@ -70,7 +70,7 @@ def extract_program_name(raw_program_name):
         return clean_prog_name.group(1)
     return raw_program_name
 
-def main():
+def scrape_cefi_data():
     # Data storage
     program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus', 'department'])
     program_peo_df = pd.DataFrame(columns=['id', 'program_id', 'peo'])
@@ -351,5 +351,7 @@ def main():
         # DELAY
         time.sleep(random.uniform(1, 3))
 
-if __name__ == '__main__':
-    main()
+    print('\n[DONE] Data extraction completed!')
+
+    # RETURN TYPES: DataFrame, DataFrame
+    return program_df, program_peo_df
