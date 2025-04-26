@@ -28,6 +28,7 @@ def extract_program_details(program_details_url, headers):
         print(f'Department Name: {dept_name}')
     else:
         dept_name = 'N/A'
+        print(f'Department Name: {dept_name}')
 
     # Program Educational Objectives (PEO)
     peo_header = prog_details_soup.find('h4', string=re.compile(r'^Program Educational Objectives', re.IGNORECASE))
@@ -79,9 +80,13 @@ def main():
                         program_tag = program.find('a')
                         program_details_url = program_tag['href']
                         program_name = program_tag.get_text(strip=True)
+                        major = 'N/A'
+                        campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Major: {major}')
+                        print(f'Campus: {campus}')
                         print()
 
                         # PROGRAM DETAILS: data extraction
@@ -96,10 +101,12 @@ def main():
                         for mj in major_listing:
                             major_details_url = mj['href']
                             major = mj.get_text(strip=True)
+                            campus = 'Lucena'
                             print()
                             print('----------------')
                             print(f'{program_name}')
                             print(f'Major: {major}')
+                            print(f'Campus: {campus}')
                             print()
 
                             # PROGRAM DETAILS: data extraction
@@ -115,9 +122,13 @@ def main():
                         program_tag = program.find('a')
                         program_details_url = program_tag['href']
                         program_name = program_tag.get_text(strip=True)
+                        major = 'N/A'
+                        campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Major: {major}')
+                        print(f'Campus: {campus}')
                         print()
 
                         # PROGRAM DETAILS: data extraction
@@ -132,9 +143,13 @@ def main():
                         program_name = strand.get_text(strip=True)
                         program_name = re.match(r'.*(?:\d+\.|\*)(.+)', program_name).group(1).strip() # Extract clean data
                         program_name = program_name.replace('&nbsp;', '') # Remove '&nbsp;' instances
+                        major = 'N/A'
+                        campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Major: {major}')
+                        print(f'Campus: {campus}')
                         print()
 
                         # PROGRAM DETAILS: data extraction
@@ -147,13 +162,17 @@ def main():
                     for strand in ul_listing:
                         program_details_url = strand['href']
                         program_name = strand.get_text()
+                        major = 'N/A'
+                        campus = 'Lucena'
                         print()
                         print('----------------')
                         print(f'{program_name}')
+                        print(f'Major: {major}')
                         print()
 
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
+                        print(f'Degree Type: {degree_type}')
                         extract_program_details(program_details_url, headers)
                     
         time.sleep(random.uniform(1, 3))
