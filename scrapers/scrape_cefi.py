@@ -61,7 +61,10 @@ def extract_degree_type(program_header, program_name):
         return 'N/A'
     
 def extract_program_name(raw_program_name):
-    return re.match(r'^(?:BS|AB|Bachelor of) (.+)', raw_program_name, re.IGNORECASE).group(1)
+    clean_prog_name = re.match(r'^(?:BS|AB|Bachelor of) (.+)', raw_program_name, re.IGNORECASE)
+    if clean_prog_name:
+        return clean_prog_name.group(1)
+    return raw_program_name
 
 def main():
     headers = {
