@@ -71,6 +71,11 @@ def extract_program_name(raw_program_name):
     return raw_program_name
 
 def main():
+    # Data storage
+    program_df = pd.DataFrame(columns=['id', 'program_name', 'major', 'degree_type', 'campus', 'department'])
+    program_peo_df = pd.DataFrame(columns=['id', 'program_id', 'peo'])
+
+    # Header initialization (for http requests)
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " \
                   "AppleWebKit/537.36 (KHTML, like Gecko) " \
@@ -113,6 +118,30 @@ def main():
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
+                            # Store extracted PEO data onto dedicated DataFrames
+                            current_prog_peo_data = pd.DataFrame({
+                                'id': [len(program_peo_df) + 1],
+                                'program_id': [len(program_df) + 1],
+                                'peo': [peo]
+                            })
+                            program_peo_df = pd.concat([program_peo_df, current_prog_peo_data], ignore_index=True)
+
+                        # Store extracted data onto dedicated DataFrames
+                        current_prog_data = pd.DataFrame({
+                            'id': [len(program_df) + 1],
+                            'program_name': [program_name],
+                            'major': [major],
+                            'degree_type': [degree_type],
+                            'campus': [campus],
+                            'department': [dept_name]
+                        })
+
+                        program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
+                        print()
+                        print(program_peo_df)
+                        print()
+                        print(program_df)
+
                     # Course w/ major listing
                     else:
                         program_name = program.find('a').get_text(strip=True)
@@ -136,6 +165,30 @@ def main():
                             print(f'Department: {dept_name}')
                             for peo in clean_peo_list:
                                 print(f' > {peo}')
+
+                                # Store extracted PEO data onto dedicated DataFrames
+                                current_prog_peo_data = pd.DataFrame({
+                                    'id': [len(program_peo_df) + 1],
+                                    'program_id': [len(program_df) + 1],
+                                    'peo': [peo]
+                                })
+                                program_peo_df = pd.concat([program_peo_df, current_prog_peo_data], ignore_index=True)
+
+                        # Store extracted data onto dedicated DataFrames
+                        current_prog_data = pd.DataFrame({
+                            'id': [len(program_df) + 1],
+                            'program_name': [program_name],
+                            'major': [major],
+                            'degree_type': [degree_type],
+                            'campus': [campus],
+                            'department': [dept_name]
+                        })
+
+                        program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
+                        print()
+                        print(program_peo_df)
+                        print()
+                        print(program_df)
         
             elif header_next.name == 'ul':
                 inner_ol = header_next.find('ol')
@@ -163,6 +216,30 @@ def main():
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
+                            # Store extracted PEO data onto dedicated DataFrames
+                            current_prog_peo_data = pd.DataFrame({
+                                'id': [len(program_peo_df) + 1],
+                                'program_id': [len(program_df) + 1],
+                                'peo': [peo]
+                            })
+                            program_peo_df = pd.concat([program_peo_df, current_prog_peo_data], ignore_index=True)
+
+                        # Store extracted data onto dedicated DataFrames
+                        current_prog_data = pd.DataFrame({
+                            'id': [len(program_df) + 1],
+                            'program_name': [program_name],
+                            'major': [major],
+                            'degree_type': [degree_type],
+                            'campus': [campus],
+                            'department': [dept_name]
+                        })
+
+                        program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
+                        print()
+                        print(program_peo_df)
+                        print()
+                        print(program_df)
+
                     # Technical-Vocational Track
                     tech_voc_listing = header_next.find_all(recursive=False)[1]
                     tech_voc_track = tech_voc_listing.find_all('a')
@@ -188,6 +265,30 @@ def main():
                         for peo in clean_peo_list:
                             print(f' > {peo}')
 
+                            # Store extracted PEO data onto dedicated DataFrames
+                            current_prog_peo_data = pd.DataFrame({
+                                'id': [len(program_peo_df) + 1],
+                                'program_id': [len(program_df) + 1],
+                                'peo': [peo]
+                            })
+                            program_peo_df = pd.concat([program_peo_df, current_prog_peo_data], ignore_index=True)
+
+                        # Store extracted data onto dedicated DataFrames
+                        current_prog_data = pd.DataFrame({
+                            'id': [len(program_df) + 1],
+                            'program_name': [program_name],
+                            'major': [major],
+                            'degree_type': [degree_type],
+                            'campus': [campus],
+                            'department': [dept_name]
+                        })
+
+                        program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
+                        print()
+                        print(program_peo_df)
+                        print()
+                        print(program_df)
+
                 # Standard one-level unordered listing
                 else:
                     ul_listing = header_next.find_all('a')
@@ -210,6 +311,30 @@ def main():
                         print(f'Department: {dept_name}')
                         for peo in clean_peo_list:
                             print(f' > {peo}')
+
+                            # Store extracted PEO data onto dedicated DataFrames
+                            current_prog_peo_data = pd.DataFrame({
+                                'id': [len(program_peo_df) + 1],
+                                'program_id': [len(program_df) + 1],
+                                'peo': [peo]
+                            })
+                            program_peo_df = pd.concat([program_peo_df, current_prog_peo_data], ignore_index=True)
+
+                        # Store extracted data onto dedicated DataFrames
+                        current_prog_data = pd.DataFrame({
+                            'id': [len(program_df) + 1],
+                            'program_name': [program_name],
+                            'major': [major],
+                            'degree_type': [degree_type],
+                            'campus': [campus],
+                            'department': [dept_name]
+                        })
+
+                        program_df = pd.concat([program_df, current_prog_data], ignore_index=True)
+                        print()
+                        print(program_peo_df)
+                        print()
+                        print(program_df)
                     
         time.sleep(random.uniform(1, 3))
 
