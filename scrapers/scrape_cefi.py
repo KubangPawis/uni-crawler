@@ -57,8 +57,12 @@ def extract_degree_type(program_header, program_name):
             return 'Bachelor'
         else:
             return 'Bachelor'
+    elif re.match(r'^SPECIAL PROGRAMS', program_header, re.IGNORECASE):
+        return 'Special Program'
+    elif re.match(r'^TECHNICAL VOCATIONAL PROGRAMS', program_header, re.IGNORECASE):
+        return 'Technical Vocational Program'
     else:
-        return 'N/A'
+        return program_header.title()
     
 def extract_program_name(raw_program_name):
     clean_prog_name = re.match(r'^(?:BS|AB|Bachelor of) (.+)', raw_program_name, re.IGNORECASE)
