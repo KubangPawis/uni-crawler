@@ -5,6 +5,7 @@ import time
 import random
 import re
 
+# RETURN VALUES: dept_name(str), clean_peo_list(list)
 def extract_program_details(program_details_url, headers):
 
     # Local method to find deepest tag nesting of <ol> and <ul> (Because of the fragmented/confusing HTML layouting)
@@ -25,22 +26,26 @@ def extract_program_details(program_details_url, headers):
     if vision_header:
         dept_match = re.search(r'The ((?:[A-Z][a-z]+|of|and)(?:\s(?:[A-Z][a-z]+|of|and))*)', vision_header.find_next('p').get_text(strip=True))
         dept_name = dept_match.group(1) if dept_match else 'N/A'
-        print(f'Department Name: {dept_name}')
     else:
         dept_name = 'N/A'
-        print(f'Department Name: {dept_name}')
 
     # Program Educational Objectives (PEO)
     peo_header = prog_details_soup.find('h4', string=re.compile(r'^Program Educational Objectives', re.IGNORECASE))
+    clean_peo_list = []
     if peo_header:
         peo_listing_base = peo_header.find_next(['ol', 'ul'])
         peo_listing = find_deepest_list_tag(peo_listing_base)
+
         if not peo_listing:
             peo_listing = peo_listing_base
+
         for peo in peo_listing:
             if peo_txt := peo.get_text(strip=True):
                 peo_txt = peo_txt.capitalize()
-                print(f' > {peo_txt}')
+                clean_peo_list.append(peo_txt)
+
+    # RETURN DTYPES: str, list
+    return dept_name, clean_peo_list
 
 def extract_degree_type(program_header, program_name):
     if re.match(r'^TERTIARY PROGRAMS', program_header, re.IGNORECASE):
@@ -92,7 +97,10 @@ def main():
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         print(f'Degree Type: {degree_type}')
-                        extract_program_details(program_details_url, headers)
+                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
+                        print(f'Department: {dept_name}')
+                        for peo in clean_peo_list:
+                            print(f' > {peo}')
 
                     # Course w/ major listing
                     else:
@@ -112,7 +120,10 @@ def main():
                             # PROGRAM DETAILS: data extraction
                             degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                             print(f'Degree Type: {degree_type}')
-                            extract_program_details(major_details_url, headers)
+                            dept_name, clean_peo_list = extract_program_details(major_details_url, headers)
+                            print(f'Department: {dept_name}')
+                            for peo in clean_peo_list:
+                                print(f' > {peo}')
         
             elif header_next.name == 'ul':
                 inner_ol = header_next.find('ol')
@@ -134,7 +145,10 @@ def main():
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         print(f'Degree Type: {degree_type}')
-                        extract_program_details(program_details_url, headers)
+                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
+                        print(f'Department: {dept_name}')
+                        for peo in clean_peo_list:
+                            print(f' > {peo}')
 
                     # Technical-Vocational Track
                     tech_voc_listing = header_next.find_all(recursive=False)[1]
@@ -155,7 +169,10 @@ def main():
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         print(f'Degree Type: {degree_type}')
-                        extract_program_details(program_details_url, headers)
+                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
+                        print(f'Department: {dept_name}')
+                        for peo in clean_peo_list:
+                            print(f' > {peo}')
 
                 # Standard one-level unordered listing
                 else:
@@ -174,7 +191,10 @@ def main():
                         # PROGRAM DETAILS: data extraction
                         degree_type = extract_degree_type(header.get_text(strip=True), program_name)
                         print(f'Degree Type: {degree_type}')
-                        extract_program_details(program_details_url, headers)
+                        dept_name, clean_peo_list = extract_program_details(program_details_url, headers)
+                        print(f'Department: {dept_name}')
+                        for peo in clean_peo_list:
+                            print(f' > {peo}')
                     
         time.sleep(random.uniform(1, 3))
 
