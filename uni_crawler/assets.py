@@ -36,10 +36,11 @@ def cefi_reindexed_prog_data(cefi_prog_data: pd.DataFrame,
 
 @asset
 def cefi_reindexed_prog_peo_data(cefi_prog_peo_data: pd.DataFrame, 
-                         mseuf_prog_data: pd.DataFrame) -> pd.DataFrame:
+                         mseuf_prog_peo_data: pd.DataFrame) -> pd.DataFrame:
     
-    prev_df_length = len(mseuf_prog_data)
+    prev_df_length = len(mseuf_prog_peo_data)
     cefi_prog_peo_data['id'] = cefi_prog_peo_data['id'] + prev_df_length
+    cefi_prog_peo_data['program_id'] = cefi_prog_peo_data['program_id'] + max(mseuf_prog_peo_data['program_id'])
     return cefi_prog_peo_data
 
 @asset
