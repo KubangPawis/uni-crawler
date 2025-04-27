@@ -33,6 +33,7 @@ def scrape_mseuf_data():
         # Major
         major_txt = major.get_text(strip=True) if major else 'N/A'
         major_txt = major_txt.replace('major in', '').strip()
+        major_txt = major_txt.replace('with specialization in', '').strip()
 
         # Campus Location
         campus_txt = campus.get_text(strip=True) if campus else 'N/A'
