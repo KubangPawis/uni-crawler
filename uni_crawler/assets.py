@@ -57,7 +57,7 @@ def export_prog_csv_data(concat_prog_data: pd.DataFrame) -> None:
     os.makedirs(output_dir, exist_ok=True)
 
     # Save the DataFrame
-    file_path = os.path.join(output_dir, 'univ_programs_peo_data.csv')
+    file_path = os.path.join(output_dir, 'univ_programs_data.csv')
     concat_prog_data.to_csv(file_path, index=False)
     print('[DONE] Scraped university program data exported successfully!')
 
