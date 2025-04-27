@@ -1,0 +1,136 @@
+id,program_name,major,degree_type,campus
+1,Junior High School,N/A,Secondary,Candelaria
+2,Secondary Education (ETEEAP),Mathematics,Bachelor,Lucena City
+3,Secondary Education (ETEEAP),Filipino,Bachelor,Lucena City
+4,Secondary Education (ETEEAP),English,Bachelor,Lucena City
+5,Culture and Arts Education,N/A,Bachelor,Lucena City
+6,Elementary Education,N/A,Bachelor,Lucena City
+7,Elementary Education,N/A,Bachelor,Catanauan
+8,Elementary Education,N/A,Bachelor,Candelaria
+9,Elementary Education,N/A,Bachelor,San Antonio
+10,Elementary Education (ETEEAP),N/A,Bachelor,Lucena City
+11,Fine Arts,Visual Communication,Bachelor,Lucena City
+12,Library and Information Science,N/A,Bachelor,Lucena City
+13,Library and Information Science (ETEEAP),N/A,Bachelor,Lucena City
+14,Physical Education,N/A,Bachelor,Lucena City
+15,Secondary Education,English,Bachelor,Lucena City
+16,Secondary Education,Filipino,Bachelor,Lucena City
+17,Secondary Education,Mathematics,Bachelor,Lucena City
+18,Secondary Education,Science,Bachelor,Lucena City
+19,Secondary Education,Social Studies,Bachelor,Lucena City
+20,Secondary Education,N/A,Bachelor,Lucena City
+21,Secondary Education,English,Bachelor,Catanauan
+22,Secondary Education,Filipino,Bachelor,Catanauan
+23,Secondary Education,Mathematics,Bachelor,Catanauan
+24,Secondary Education,English,Bachelor,Candelaria
+25,Secondary Education,Mathematics,Bachelor,Candelaria
+26,Secondary Education,Science,Bachelor,Candelaria
+27,Secondary Education,Science,Bachelor,Candelaria
+28,Secondary Education,Social Studies,Bachelor,Candelaria
+29,Secondary Education,Filipino,Bachelor,Candelaria
+30,Secondary Education,Mathematics,Bachelor,San Antonio
+31,Secondary Education (ETEEAP),Science,Bachelor,Lucena City
+32,Communication,N/A,Bachelor of Arts,Lucena City
+33,Communication (ETEEAP),N/A,Bachelor of Arts,Lucena City
+34,English Language,N/A,Bachelor of Arts,Lucena City
+35,Political Science,N/A,Bachelor of Arts,Lucena City
+36,Political Science (ETEEAP),N/A,Bachelor of Arts,Lucena City
+37,Psychology,N/A,Bachelor of Arts,Candelaria
+38,Psychology (ETEEAP),N/A,Bachelor of Arts,Lucena City
+39,Tourism Management,N/A,Bachelor of Science,Candelaria
+40,Accountancy,N/A,Bachelor of Science,Lucena City
+41,Accountancy,N/A,Bachelor of Science,Candelaria
+42,Architecture,N/A,Bachelor of Science,Lucena City
+43,Biology,N/A,Bachelor of Science,Lucena City
+44,Business Administration,Marketing Management,Bachelor of Science,Lucena City
+45,Business Administration,Human Resource Management,Bachelor of Science,Lucena City
+46,Business Administration,Financial Management,Bachelor of Science,Lucena City
+47,Business Administration,Operations Management,Bachelor of Science,Lucena City
+48,Business Administration,Human Resources Management,Bachelor of Science,Catanauan
+49,Business Administration,Human Resource Management,Bachelor of Science,San Antonio
+50,Business Administration (ETEEAP),Human Resource Management,Bachelor of Science,Lucena City
+51,Business Administration (ETEEAP),Financial Management,Bachelor of Science,Lucena City
+52,Business Administration (ETEEAP),Marketing Management,Bachelor of Science,Lucena City
+53,Business Administration (ETEEAP),Operations Management,Bachelor of Science,Lucena City
+54,Civil Engineering,N/A,Bachelor of Science,Lucena City
+55,Civil Engineering (ETEEAP),N/A,Bachelor of Science,Lucena City
+56,Computer Engineering,N/A,Bachelor of Science,Lucena City
+57,Computer Engineering,N/A,Bachelor of Science,Candelaria
+58,Computer Science,Data Science,Bachelor of Science,Lucena City
+59,Computer Science,Software Engineering,Bachelor of Science,Lucena City
+60,Computer Science,N/A,Bachelor of Science,Candelaria
+61,Criminology,N/A,Bachelor of Science,Lucena City
+62,Criminology,N/A,Bachelor of Science,Calauag
+63,Criminology (ETEEAP),N/A,Bachelor of Science,Lucena City
+64,Economics,N/A,Bachelor of Science,Lucena City
+65,Electrical Engineering,N/A,Bachelor of Science,Lucena City
+66,Electrical Engineering ETEEAP),N/A,Bachelor of Science,Lucena City
+67,Electronics Engineering,N/A,Bachelor of Science,Lucena City
+68,Electronics Engineering (ETEEAP),N/A,Bachelor of Science,Lucena City
+69,Entertainment & Multimedia Computing,Game Development,Bachelor of Science,Lucena City
+70,Entertainment & Multimedia Computing,Digital Animation Technology,Bachelor of Science,Lucena City
+71,Environmental Science,N/A,Bachelor of Science,Lucena City
+72,Environmental Science (ETEEAP),N/A,Bachelor of Science,Lucena City
+73,Geodetic Engineering,N/A,Bachelor of Science,Lucena City
+74,Geodetic Engineering (ETEEAP),N/A,Bachelor of Science,Lucena City
+75,Hospitality Management,Cruise Management,Bachelor of Science,Lucena City
+76,Hospitality Management,Culinary Arts,Bachelor of Science,Lucena City
+77,Hospitality Management,N/A,Bachelor of Science,Lucena City
+78,Hospitality Management,N/A,Bachelor of Science,Candelaria
+79,Hospitality Management (ETEEAP),N/A,Bachelor of Science,Lucena City
+80,Industrial Engineering,N/A,Bachelor of Science,Lucena City
+81,Industrial Engineering,N/A,Bachelor of Science,Calauag
+82,Industrial Engineering (ETEEAP),N/A,Bachelor of Science,Lucena City
+83,Information Technology,Web & Mobile Application,Bachelor of Science,Lucena City
+84,Information Technology,CISCO Networking,Bachelor of Science,Lucena City
+85,Information Technology (ETEEAP),N/A,Bachelor of Science,Lucena City
+86,Management Accounting,N/A,Bachelor of Science,Lucena City
+87,Management Accounting,N/A,Bachelor of Science,Calauag
+88,Marine Engineering,N/A,Bachelor of Science,Lucena City
+89,Marine Transportation,N/A,Bachelor of Science,Lucena City
+90,Mechanical Engineering,N/A,Bachelor of Science,Lucena City
+91,Mechanical Engineering (ETEEAP),N/A,Bachelor of Science,Lucena City
+92,Medical Technology,N/A,Bachelor of Science,Lucena City
+93,Nursing,N/A,Bachelor of Science,Lucena City
+94,Nursing,N/A,Bachelor of Science,Candelaria
+95,Office Administration,N/A,Bachelor of Science,Lucena City
+96,Office Administration (ETEEAP),N/A,Bachelor of Science,Lucena City
+97,Psychology,N/A,Bachelor of Science,Lucena City
+98,Public Administration,N/A,Bachelor of Science,Lucena City
+99,Public Administration (ETEEAP),N/A,Bachelor of Science,Lucena City
+100,Tourism Management,N/A,Bachelor of Science,Lucena City
+101,Nursing,N/A,Bachelor of Science,Lucena
+102,Medical Technology,N/A,Bachelor of Science,Lucena
+103,Radiologic Technology,N/A,Bachelor of Science,Lucena
+104,Physical Therapy,N/A,Bachelor of Science,Lucena
+105,Mass Communication,N/A,Bachelor of Arts,Lucena
+106,Economics,N/A,Bachelor of Arts,Lucena
+107,in Hospitality Management,N/A,Bachelor of Science,Lucena
+108,Tourism Management,N/A,Bachelor of Science,Lucena
+109,Accountancy,N/A,Bachelor of Science,Lucena
+110,Management Accounting,N/A,Bachelor of Science,Lucena
+111,Business Administration,Human Resource Management,Bachelor of Science,Lucena
+112,Criminology,N/A,Bachelor of Science,Lucena
+113,Information Systems,N/A,Bachelor of Science,Lucena
+114,Psychology,N/A,Bachelor of Science,Lucena
+115,Secondary Education,English,Bachelor of Arts,Lucena
+116,Culture and Arts Education,N/A,Bachelor of Arts,Lucena
+117,Elementary Education,N/A,Bachelor of Arts,Lucena
+118,Midwifery,N/A,Bachelor,Lucena
+119,Local Board Review (BS Nursing),N/A,Special Program,Lucena
+120,Caregiving NC II,N/A,Technical Vocational Program,Lucena
+121,Medical Transcription NC II,N/A,Technical Vocational Program,Lucena
+122,Food and Beverage Services NC II,N/A,Technical Vocational Program,Lucena
+123,Commercial Cooking (Culinary Arts),N/A,Technical Vocational Program,Lucena
+124,Health Care Services,N/A,Technical Vocational Program,Lucena
+125,"Science, Technology and Mathematics (STEM) Strand",N/A,Senior High School,Lucena
+126,"Accountancy, Business, and Management (ABM) Strand",N/A,Senior High School,Lucena
+127,Humanities and Social Sciences (HUMSS) Strand,N/A,Senior High School,Lucena
+128,Home Economic Strand,N/A,Senior High School,Lucena
+129,Caregiving Strand,N/A,Senior High School,Lucena
+130,Cookery,N/A,Senior High School,Lucena
+131,Information and Communication Technology Strand,N/A,Senior High School,Lucena
+132,Day High School,N/A,High School,Lucena
+133,Nursery,N/A,Pre-Elementary,Lucena
+134,Kindergarten,N/A,Pre-Elementary,Lucena
+135,Preparatory,N/A,Pre-Elementary,Lucena
