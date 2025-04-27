@@ -2,6 +2,9 @@ from scrapers.scrape_mseuf import scrape_mseuf_data
 from scrapers.scrape_cefi import scrape_cefi_data
 from dagster import asset
 import pandas as pd
+import os
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 @asset
 def mseuf_prog_data() -> pd.DataFrame:
@@ -49,12 +52,22 @@ def concat_prog_peo_data(mseuf_prog_peo_data: pd.DataFrame, cefi_reindexed_prog_
 
 @asset
 def export_prog_csv_data(concat_prog_data: pd.DataFrame) -> None:
-    file_path = '../outputs/univ_programs_data.csv'
+    # SAFETY: Ensure that the export path exists
+    output_dir = os.path.join(PROJECT_ROOT, 'outputs')
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Save the DataFrame
+    file_path = os.path.join(output_dir, 'univ_programs_peo_data.csv')
     concat_prog_data.to_csv(file_path, index=False)
     print('[DONE] Scraped university program data exported successfully!')
 
 @asset
 def export_prog_peo_csv_data(concat_prog_peo_data: pd.DataFrame) -> None:
-    file_path = '../outputs/univ_programs_peo_data.csv'
+    # SAFETY: Ensure that the export path exists
+    output_dir = os.path.join(PROJECT_ROOT, 'outputs')
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Save the DataFrame
+    file_path = os.path.join(output_dir, 'univ_programs_peo_data.csv')
     concat_prog_peo_data.to_csv(file_path, index=False)
-    print('[DONE] Scraped university program PEO data exported successfully!')
+    print('[DONE] Scraped university program data exported successfully!')
